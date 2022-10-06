@@ -1,100 +1,61 @@
 package com.example.calculadora;
 
-import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
-    private Button btn_suma;
-    private Button btn_resta;
-    private Button btn_division;
-    private Button btn_multiplicacion;
-
-    private TextView text_respuesta;
-
-    private EditText edit_numero_uno;
-    private EditText edit_numero_dos;
-
-
-
+    public double contador;
+    EditText operando1, operando2;
+    TextView textoResultado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        text_respuesta = findViewById(R.id.respuesta);
-
-        edit_numero_uno = findViewById(R.id.numero1);
-        edit_numero_dos = findViewById(R.id.numero2);
-
-
-
-
-
-
-        btn_suma = findViewById(R.id.boton_suma);
-        btn_suma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                text_respuesta.setText(suma(Integer.parseInt(edit_numero_uno.getText().toString()),Integer.parseInt(edit_numero_dos.getText().toString()))+"");
-            }
-        });
-
-
-        btn_division = findViewById(R.id.boton_division);
-        btn_division.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                text_respuesta.setText( division( Integer.parseInt(edit_numero_uno.getText().toString()),Integer.parseInt(edit_numero_dos.getText().toString()) )+"");
-
-            }
-        });
-
-        btn_multiplicacion = findViewById(R.id.button_multiplicacion);
-        btn_multiplicacion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                text_respuesta.setText( multiplicacion( Integer.parseInt(edit_numero_uno.getText().toString()),Integer.parseInt(edit_numero_dos.getText().toString()) )+"");
-
-            }
-        });
-
-        btn_resta = findViewById(R.id.boton_resta);
-        btn_resta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                text_respuesta.setText( resta( Integer.parseInt(edit_numero_uno.getText().toString()),Integer.parseInt(edit_numero_dos.getText().toString()) )+"");
-
-            }
-        });
-
+        operando1 = (EditText)findViewById(R.id.numero1);
+        operando2 = (EditText)findViewById(R.id.numero2);
+        textoResultado = (TextView) findViewById(R.id.contador);
+        contador = 0;
     }
 
-    public double suma (int a, int b){
+    public void sumar(View vista) {
+        double valor1 = Double.parseDouble(operando1.getText().toString());
+        double valor2 = Double.parseDouble(operando2.getText().toString());
+        double resultado = valor1 + valor2;
 
-        return a+b;
+        textoResultado.setText(" " + resultado);
     }
 
-    public double resta (double a, double b){
-        return a-b;
+    public void restar(View vista) {
+        double valor1 = Double.parseDouble(operando1.getText().toString());
+        double valor2 = Double.parseDouble(operando2.getText().toString());
+        double contador = valor1 - valor2;
+
+        textoResultado.setText(" " + contador);
     }
 
-    public double multiplicacion (double a, double b){
-        return a*b;
+    public void multiplicar(View vista) {
+        double valor1 = Double.parseDouble(operando1.getText().toString());
+        double valor2 = Double.parseDouble(operando2.getText().toString());
+        double contador = valor1 * valor2;
+
+        textoResultado.setText(" " + contador);
     }
 
-    public double division (double a, double b){
-        double respuesta = 0;
-
-        if (b!=0){
-            respuesta=a/b;
+    public void dividir(View vista) {
+        double valor1 = Double.parseDouble(operando1.getText().toString());
+        double valor2 = Double.parseDouble(operando2.getText().toString());
+        do{
+            double contador = valor1 / valor2;
+        }while(valor1 != 0);
+        if(valor1 == 0){
+            contador = 0;
         }
-
-        return respuesta;
+        textoResultado.setText(" " + contador);
     }
+
 }
